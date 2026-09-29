@@ -1,0 +1,5 @@
+# Orbis Team — all search engines and AI assistants welcome
+User-agent: *
+Allow: /
+
+Sitemap: https://www.orbisteam.com/sitemap.xml
