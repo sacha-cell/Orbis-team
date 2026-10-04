@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guides — Orbis Team</title>
+<meta name="description" content="Media-buying guides for CMOs and marketing leaders, by company size — Enterprise, Mid-Market, and SMB. Free downloads, no email required.">
+<link rel="canonical" href="https://www.orbisteam.com/guide.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.orbisteam.com/guide.html">
+<meta property="og:title" content="Guides — Orbis Team">
+<meta property="og:description" content="Media-buying guides for CMOs and marketing leaders, by company size — Enterprise, Mid-Market, and SMB. Free downloads, no email required.">
+<meta property="og:image" content="https://www.orbisteam.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --bg:        #0a0a0f;
+    --bg2:       #111118;
+    --bg3:       #16161f;
+    --surface:   #1c1c27;
+    --border:    #2a2a3a;
+    --gold:      #c9a84c;
+    --gold-dim:  #a88830;
+    --text:      #e8e6e0;
+    --text-dim:  #8c8a84;
+    --text-sub:  #b0aead;
+    --nav-bg:    rgba(10,10,15,0.92);
+    --logo-filter: none;
+    --card-bg:   #1c1c27;
+    --btn-text:  #0a0a0f;
+  }
+  [data-theme="light"] {
+    --bg:        #f5f3ee;
+    --bg2:       #ede9e1;
+    --bg3:       #e8e3d8;
+    --surface:   #ffffff;
+    --border:    #d4cfc5;
+    --gold:      #9a7420;
+    --gold-dim:  #7a5c10;
+    --text:      #1a1a22;
+    --text-dim:  #6b6860;
+    --text-sub:  #4a4845;
+    --nav-bg:    rgba(245,243,238,0.95);
+    --logo-filter: invert(1) brightness(0.1);
+    --card-bg:   #ffffff;
+    --btn-text:  #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    transition: background 0.3s, color 0.3s;
+    overflow-x: hidden;
+  }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { color: var(--gold-dim); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.3s;
+  }
+  .nav-logo img { height: 38px; filter: var(--logo-filter); transition: filter 0.3s; }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: 'Arial', sans-serif; font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-dim); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .toggle-btn {
+    background: none; border: 1px solid var(--border); color: var(--text-dim);
+    cursor: pointer; width: 38px; height: 38px; border-radius: 50%; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .toggle-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .nav-cta {
+    font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; background: var(--gold); color: var(--btn-text);
+    padding: 10px 22px; border-radius: 2px; font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-dim); color: #fff; }
+
+  .hero {
+    padding: 160px 80px 80px;
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 60% 50% at 70% 30%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-family: 'Georgia', serif; font-size: clamp(32px, 4.4vw, 54px); font-weight: normal;
+    line-height: 1.16; color: var(--text); max-width: 780px; margin-bottom: 20px; letter-spacing: -0.01em;
+  }
+  .hero-sub {
+    font-family: 'Arial', sans-serif; font-size: 16px; color: var(--text-sub);
+    max-width: 620px; line-height: 1.7;
+  }
+
+  section.cards { padding: 88px 80px 96px; }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .tier-card {
+    background: var(--card-bg);
+    padding: 44px 38px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .tier-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+    background: var(--gold); transition: width 0.35s ease;
+  }
+  .tier-card:hover::after { width: 100%; }
+  .tier-band {
+    font-family: 'Arial', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+  }
+  .tier-card h3 {
+    font-family: 'Georgia', serif; font-size: 22px; font-weight: normal; color: var(--text);
+    line-height: 1.32; margin-bottom: 14px; min-height: 84px;
+  }
+  .tier-desc {
+    font-family: 'Arial', sans-serif; font-size: 13.5px; color: var(--text-dim);
+    line-height: 1.7; margin-bottom: 32px; flex-grow: 1;
+  }
+  .tier-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+  .btn-download {
+    font-family: 'Arial', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 700; background: var(--gold); color: var(--btn-text);
+    padding: 14px 20px; border-radius: 2px; text-align: center;
+    transition: background 0.2s;
+  }
+  .btn-download:hover { background: var(--gold-dim); color: #fff; }
+  .tier-links { display: flex; gap: 18px; justify-content: center; }
+  .tier-links a {
+    font-family: 'Arial', sans-serif; font-size: 11.5px; letter-spacing: 0.06em;
+    color: var(--text-dim); border-bottom: 1px solid transparent;
+  }
+  .tier-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .guide-note {
+    max-width: 720px; margin: 56px auto 0;
+    font-family: 'Arial', sans-serif; font-size: 13px; color: var(--text-dim);
+    text-align: center; line-height: 1.7;
+  }
+
+  footer {
+    padding: 48px 80px; display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px; border-top: 1px solid var(--border);
+  }
+  .footer-logo img { height: 28px; filter: var(--logo-filter); transition: filter 0.3s; opacity: 0.7; }
+  .footer-address { font-family: 'Arial', sans-serif; font-size: 12px; color: var(--text-dim); text-align: center; line-height: 1.7; }
+  .footer-legal { font-family: 'Arial', sans-serif; font-size: 12px; color: var(--text-dim); text-align: right; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 56px; }
+    section.cards { padding: 56px 24px 72px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .tier-card h3 { min-height: 0; }
+    footer { padding: 36px 24px; flex-direction: column; align-items: flex-start; }
+    .footer-legal { text-align: left; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNzIiIHdpZHRoPSI0MjAiIGhlaWdodD0iNzIiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAub3QtbWFyayB7IGZpbGw6IG5vbmU7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAub3QtdGV4dCB7IGZpbGw6ICNmZmZmZmY7IH0KICAgICAgLm90LWRvdCAgeyBmaWxsOiAjZmZmZmZmOyB9CiAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsKICAgICAgICAub3QtbWFyayB7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAgIC5vdC10ZXh0IHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICAgIC5vdC1kb3QgIHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KCiAgPCEtLSBTaWdodCBzY29wZSBpY29uOiBvdXRlciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMjgiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIFNpZ2h0IHNjb3BlOiBpbm5lciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMTAiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIENyb3NzaGFpciBsaW5lcyDigJQgdG9wIC0tPgogIDxsaW5lIHgxPSIzNiIgeTE9IjgiICB4Mj0iMzYiIHkyPSIyMiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPCEtLSBib3R0b20gLS0+CiAgPGxpbmUgeDE9IjM2IiB5MT0iNTAiIHgyPSIzNiIgeTI9IjY0IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIGxlZnQgLS0+CiAgPGxpbmUgeDE9IjgiICB5MT0iMzYiIHgyPSIyMiIgeTI9IjM2IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIHJpZ2h0IC0tPgogIDxsaW5lIHgxPSI1MCIgeTE9IjM2IiB4Mj0iNjQiIHkyPSIzNiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CgogIDwhLS0gQ2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIzNiIgY3k9IjM2IiByPSIyLjUiIGNsYXNzPSJvdC1kb3QiLz4KCiAgPCEtLSBPUkJJUyBURUFNIHRleHQgLS0+CiAgPHRleHQKICAgIHg9IjgwIiB5PSIzMCIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSI3MDAiCiAgICBsZXR0ZXItc3BhY2luZz0iNiIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5PUkJJUzwvdGV4dD4KCiAgPHRleHQKICAgIHg9IjgwIiB5PSI1NiIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSIzMDAiCiAgICBsZXR0ZXItc3BhY2luZz0iOCIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5URUFNPC90ZXh0PgoKPC9zdmc+" alt="Orbis Team"></a>
+  <ul class="nav-links">
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#experience">Experience</a></li>
+    <li><a href="/#why">Why Orbis Team</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme">☀</button>
+    <a href="https://api.leadconnectorhq.com/widget/bookings/orbis-intro-call-9288" class="nav-cta" target="_blank" rel="noopener">Book a Time</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-eyebrow">FREE GUIDES</div>
+  <h1>Media guides for CMOs and marketing leaders — by company size.</h1>
+  <p class="hero-sub">Three guides, same core discipline: the execution layer is automating, and the judgment isn't. Pick the one built for where you are — no email required, just download and read.</p>
+</section>
+
+<!-- CARDS -->
+<section class="cards">
+  <div class="cards-grid">
+
+    <div class="tier-card">
+      <div class="tier-band">Enterprise · $250M+ Revenue</div>
+      <h3>The 2026–2027 CMO Guide</h3>
+      <p class="tier-desc">For CMOs at large, complex organizations navigating what's left of the job as AI agents absorb the execution layer — and what to show the board instead.</p>
+      <div class="tier-actions">
+        <a class="btn-download" href="https://assets.cdn.filesafe.space/l5albo9V7WG70zVer0XN/media/6aa8169d03687f733eb2e77f.pdf" target="_blank" rel="noopener">Download the Guide</a>
+        <div class="tier-links">
+          <a href="https://api.leadconnectorhq.com/widget/bookings/orbis-intro-call-9288" target="_blank" rel="noopener">Book a time</a>
+          <a href="mailto:sacha@orbisteam.com">Ask a question</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-band">Mid-Market · $100M+ Revenue</div>
+      <h3>Decisions, Not Dashboards</h3>
+      <p class="tier-desc">Taking control of paid media in the era of AI agents — for marketing leaders with a real team, closing the ownership gap the platforms are quietly counting on.</p>
+      <div class="tier-actions">
+        <a class="btn-download" href="https://assets.cdn.filesafe.space/l5albo9V7WG70zVer0XN/media/6aabd9a6cdcceb9f499ad039.pdf" target="_blank" rel="noopener">Download the Guide</a>
+        <div class="tier-links">
+          <a href="https://api.leadconnectorhq.com/widget/bookings/orbis-intro-call-9288" target="_blank" rel="noopener">Book a time</a>
+          <a href="mailto:sacha@orbisteam.com">Ask a question</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-band">SMB · Under $10M Revenue</div>
+      <h3>Stop Subsidizing the Algorithm</h3>
+      <p class="tier-desc">How SMBs win when ad platforms run on autopilot — a short, practical list of guardrails so automated bidding works for your cash flow, not against it.</p>
+      <div class="tier-actions">
+        <a class="btn-download" href="https://assets.cdn.filesafe.space/l5albo9V7WG70zVer0XN/media/6aabd918bdaa5e26a9fde4fa.pdf" target="_blank" rel="noopener">Download the Guide</a>
+        <div class="tier-links">
+          <a href="https://api.leadconnectorhq.com/widget/bookings/orbis-intro-call-9288" target="_blank" rel="noopener">Book a time</a>
+          <a href="mailto:sacha@orbisteam.com">Ask a question</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="guide-note">Not sure which one fits? Go by revenue band, not team size — the guides assume different levels of existing structure and budget. If you're between two, start with the smaller one and book a time to talk through the rest.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="/"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNzIiIHdpZHRoPSI0MjAiIGhlaWdodD0iNzIiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAub3QtbWFyayB7IGZpbGw6IG5vbmU7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAub3QtdGV4dCB7IGZpbGw6ICNmZmZmZmY7IH0KICAgICAgLm90LWRvdCAgeyBmaWxsOiAjZmZmZmZmOyB9CiAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsKICAgICAgICAub3QtbWFyayB7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAgIC5vdC10ZXh0IHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICAgIC5vdC1kb3QgIHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KCiAgPCEtLSBTaWdodCBzY29wZSBpY29uOiBvdXRlciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMjgiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIFNpZ2h0IHNjb3BlOiBpbm5lciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMTAiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIENyb3NzaGFpciBsaW5lcyDigJQgdG9wIC0tPgogIDxsaW5lIHgxPSIzNiIgeTE9IjgiICB4Mj0iMzYiIHkyPSIyMiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPCEtLSBib3R0b20gLS0+CiAgPGxpbmUgeDE9IjM2IiB5MT0iNTAiIHgyPSIzNiIgeTI9IjY0IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIGxlZnQgLS0+CiAgPGxpbmUgeDE9IjgiICB5MT0iMzYiIHgyPSIyMiIgeTI9IjM2IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIHJpZ2h0IC0tPgogIDxsaW5lIHgxPSI1MCIgeTE9IjM2IiB4Mj0iNjQiIHkyPSIzNiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CgogIDwhLS0gQ2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIzNiIgY3k9IjM2IiByPSIyLjUiIGNsYXNzPSJvdC1kb3QiLz4KCiAgPCEtLSBPUkJJUyBURUFNIHRleHQgLS0+CiAgPHRleHQKICAgIHg9IjgwIiB5PSIzMCIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSI3MDAiCiAgICBsZXR0ZXItc3BhY2luZz0iNiIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5PUkJJUzwvdGV4dD4KCiAgPHRleHQKICAgIHg9IjgwIiB5PSI1NiIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSIzMDAiCiAgICBsZXR0ZXItc3BhY2luZz0iOCIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5URUFNPC90ZXh0PgoKPC9zdmc+" alt="Orbis Team"></a>
+  <div class="footer-address">
+    6650 Rivers Ave, STE 100 · Charleston, SC 29406 · <a href="mailto:info@orbisteam.com">info@orbisteam.com</a>
+  </div>
+  <div class="footer-legal">© 2026 Orbis Team<br>Retail Media · CTV · Programmatic</div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  let saved = 'dark';
+  try { saved = localStorage.getItem('orbis-theme') || 'dark'; } catch (e) {}
+  html.setAttribute('data-theme', saved);
+  toggle.textContent = saved === 'dark' ? '☀' : '☾';
+  toggle.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    toggle.textContent = next === 'dark' ? '☀' : '☾';
+    try { localStorage.setItem('orbis-theme', next); } catch (e) {}
+  });
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a7acdb9e427c78bb50022d2" data-source="WEB_USER"></script>
+</body>
+</html>
