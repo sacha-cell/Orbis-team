@@ -276,6 +276,141 @@
     line-height: 1.65;
   }
 
+  /* ── PROBLEM / FIX ────────────────────────────────────── */
+  .ps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .ps-card { background: var(--card-bg); padding: 48px 44px; }
+  .ps-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .ps-card h3 {
+    font-family: 'Georgia', serif;
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: normal;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .ps-card p {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+
+  /* ── HOW IT WORKS ─────────────────────────────────────── */
+  .steps {
+    list-style: none;
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .step { border-top: 1px solid var(--gold); padding-top: 24px; }
+  .step-num {
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .step h3 {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    font-weight: normal;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .step p {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .offer-box {
+    margin-top: 64px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    padding: 40px 44px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .offer-box h3 {
+    font-family: 'Georgia', serif;
+    font-size: 26px;
+    font-weight: normal;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .offer-box p {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+  .offer-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .offer-list li {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: var(--text-sub);
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .offer-list li::before {
+    content: '';
+    position: absolute; left: 0; top: 10px;
+    width: 10px; height: 1px; background: var(--gold);
+  }
+  .terms-note {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 24px;
+  }
+
+  /* ── BELIEFS ──────────────────────────────────────────── */
+  .beliefs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-top: 48px;
+  }
+  .belief h3 {
+    font-family: 'Georgia', serif;
+    font-size: 21px;
+    font-weight: normal;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .belief p {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+  .closing-line {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    color: var(--text-sub);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
   /* ── SERVICES ─────────────────────────────────────────── */
   .services-grid {
     display: grid;
@@ -512,11 +647,17 @@
     .about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
     .about-right { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 40px; }
     .services-grid { grid-template-columns: 1fr; }
+    .ps-grid, .offer-box, .beliefs { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .ps-card, .offer-box { padding: 32px 24px; }
     .form-row { grid-template-columns: 1fr; }
     footer { padding: 40px 28px; flex-direction: column; align-items: flex-start; }
     .footer-legal { text-align: left; }
     .hero-stat-row { gap: 32px; }
     .exp-table td:first-child { white-space: normal; width: auto; }
+  }
+  @media (max-width: 560px) {
+    .steps { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -641,9 +782,8 @@
 <nav>
   <a class="nav-logo" href="#"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNzIiIHdpZHRoPSI0MjAiIGhlaWdodD0iNzIiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAub3QtbWFyayB7IGZpbGw6IG5vbmU7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAub3QtdGV4dCB7IGZpbGw6ICNmZmZmZmY7IH0KICAgICAgLm90LWRvdCAgeyBmaWxsOiAjZmZmZmZmOyB9CiAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsKICAgICAgICAub3QtbWFyayB7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAgIC5vdC10ZXh0IHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICAgIC5vdC1kb3QgIHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KCiAgPCEtLSBTaWdodCBzY29wZSBpY29uOiBvdXRlciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMjgiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIFNpZ2h0IHNjb3BlOiBpbm5lciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMTAiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIENyb3NzaGFpciBsaW5lcyDigJQgdG9wIC0tPgogIDxsaW5lIHgxPSIzNiIgeTE9IjgiICB4Mj0iMzYiIHkyPSIyMiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPCEtLSBib3R0b20gLS0+CiAgPGxpbmUgeDE9IjM2IiB5MT0iNTAiIHgyPSIzNiIgeTI9IjY0IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIGxlZnQgLS0+CiAgPGxpbmUgeDE9IjgiICB5MT0iMzYiIHgyPSIyMiIgeTI9IjM2IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIHJpZ2h0IC0tPgogIDxsaW5lIHgxPSI1MCIgeTE9IjM2IiB4Mj0iNjQiIHkyPSIzNiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CgogIDwhLS0gQ2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIzNiIgY3k9IjM2IiByPSIyLjUiIGNsYXNzPSJvdC1kb3QiLz4KCiAgPCEtLSBPUkJJUyBURUFNIHRleHQgLS0+CiAgPHRleHQKICAgIHg9IjgwIiB5PSIzMCIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSI3MDAiCiAgICBsZXR0ZXItc3BhY2luZz0iNiIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5PUkJJUzwvdGV4dD4KCiAgPHRleHQKICAgIHg9IjgwIiB5PSI1NiIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSIzMDAiCiAgICBsZXR0ZXItc3BhY2luZz0iOCIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5URUFNPC90ZXh0PgoKPC9zdmc+" alt="Orbis Team"></a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
+    <li><a href="#how">How It Works</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#belief">Our Belief</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#why">Why Orbis Team</a></li>
     <li><a href="/pricing">Pricing</a></li>
@@ -651,17 +791,18 @@
   </ul>
   <div class="nav-right">
     <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme">☀</button>
-    <a href="#contact" class="nav-cta">Request a Consultation</a>
+    <a href="https://api.leadconnectorhq.com/widget/bookings/orbis-intro-call-9288" class="nav-cta">Book a Time</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <h1>Full-Funnel Advertising,<br><em>Built for What's Next.</em></h1>
-  <p class="hero-sub">Orbis Team plans and buys retail media, connected TV and programmatic across the industry's leading platforms — with the strategy and judgment that AI can't replace.</p>
+  <div class="hero-eyebrow">Retail Media · CTV · Programmatic</div>
+  <h1>Your media mix made sense<br><em>six months ago.</em></h1>
+  <p class="hero-sub">Orbis Team plans and buys retail media, connected TV and programmatic across the industry's leading platforms. The platforms automate the buy. A senior strategist owns the call.</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Request a Consultation</a>
-    <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services →</button>
+    <a href="https://api.leadconnectorhq.com/widget/bookings/orbis-intro-call-9288" class="btn-primary">Book a Time</a>
+    <button class="btn-ghost" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See How It Works →</button>
   </div>
   <div class="hero-stat-row">
     <div class="hero-stat"><strong>35+</strong><span>Years Combined Experience</span></div>
@@ -670,79 +811,125 @@
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- PROBLEM / FIX -->
 <section id="about">
-  <div class="section-eyebrow">Who We Are</div>
-  <div class="about-grid">
-    <div class="about-left">
-      <h2 class="section-title">A boutique agency built at the intersection of retail media, programmatic, and connected TV.</h2>
-      <div class="section-body">
-        <p>We've worked inside the platforms, alongside the networks, and directly with brands. Our clients don't pay for a learning curve — they get a team that has navigated every stage of this industry's evolution, from broadcast to programmatic to retail media.</p>
-      </div>
+  <div class="ps-grid">
+    <div class="ps-card">
+      <div class="ps-label">01 · The problem</div>
+      <h3>Every platform is optimizing its own auction. Nobody is optimizing your plan.</h3>
+      <p>Spend drifts through reasonable exceptions. Channels get renewed out of habit. Each platform reports its own win, and no one owns the call across all of them.</p>
     </div>
-    <div class="about-right">
-      <div class="about-pillar">
-        <h4>Independent</h4>
-        <p>No holding company. No platform volume commitments. Our only obligation is the outcome we're accountable for delivering.</p>
-      </div>
+    <div class="ps-card">
+      <div class="ps-label">02 · The fix</div>
+      <h3>The platforms run the buy. We decide what's worth buying.</h3>
+      <p>We work across retail media, CTV and programmatic, choosing audience, channel and budget as one plan. No holding company, no platform quotas, no volume commitments. Our only obligation is the outcome.</p>
     </div>
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
+<section id="how" style="background:var(--bg2);">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">From first call to a plan you can defend.</h2>
+  <ol class="steps">
+    <li class="step">
+      <div class="step-num">01</div>
+      <h3>Bring your current plan</h3>
+      <p>A 30-minute call. We'll tell you what we'd cut, what we'd test, and whether we're the right fit.</p>
+    </li>
+    <li class="step">
+      <div class="step-num">02</div>
+      <h3>Orbis Audit</h3>
+      <p>We review your current plan and setup before anything launches. Read-only access; no changes without your sign-off.</p>
+    </li>
+    <li class="step">
+      <div class="step-num">03</div>
+      <h3>Agree one outcome</h3>
+      <p>We get data and tracking in order and agree the single outcome the program will be judged on.</p>
+    </li>
+    <li class="step">
+      <div class="step-num">04</div>
+      <h3>Run, review, decide</h3>
+      <p>A senior strategist reviews and signs off every recommendation, on a set review cadence.</p>
+    </li>
+  </ol>
+  <div class="offer-box">
+    <div>
+      <div class="ps-label">The first step</div>
+      <h3>Supercharge: a 30-day channel sprint</h3>
+      <p>Prove one channel before committing to a retainer. A fixed-scope, 30-day program with a clear result at the end.</p>
+    </div>
+    <ul class="offer-list">
+      <li>Orbis Audit of your current plan</li>
+      <li>One channel planned, launched and optimized</li>
+      <li>One agreed outcome, reported at day 30</li>
+      <li>A clear recommendation: scale, change or stop</li>
+    </ul>
+  </div>
+  <p class="terms-note">No long-term lock-in. Cancel anytime with standard 4A's notice; fees are prorated through the end date. <a href="/pricing">See pricing</a>.</p>
+</section>
+
 <!-- SERVICES -->
-<section id="services" style="background:var(--bg2);">
+<section id="services">
   <div class="section-eyebrow">What We Deliver</div>
   <h2 class="section-title">Six capabilities. One integrated approach.</h2>
   <div class="services-grid">
     <div class="service-card">
       <div class="service-num">01</div>
       <h3>Retail Media Activation</h3>
-      <p>We activate campaigns across the premier retail media networks — combining commerce-first audience data with programmatic precision to reach in-market shoppers at every stage of the purchase journey. Onsite, offsite, and connected.</p>
+      <p>Campaigns across the leading retail media networks, on-site and off-site, using shopper data to reach people who are ready to buy.</p>
     </div>
     <div class="service-card">
       <div class="service-num">02</div>
       <h3>Connected Television</h3>
-      <p>We execute streaming campaigns that connect to real outcomes — using verified household and behavioral data to reach the right viewers on the right screens, with measurement frameworks that prove the lift. CTV as performance, not just awareness.</p>
+      <p>Streaming TV bought against household data and measured on results, not just reach. CTV as a performance channel.</p>
     </div>
     <div class="service-card">
       <div class="service-num">03</div>
       <h3>Programmatic Display & Audience Targeting</h3>
-      <p>Audience-first programmatic strategies across the open web, mobile, and in-app environments — drawing on first-party, verified third-party, and contextual data. Built for the post-cookie world.</p>
+      <p>Display and video across web, mobile and apps, built on your own customer data plus verified and contextual audiences.</p>
     </div>
     <div class="service-card">
       <div class="service-num">04</div>
       <h3>Omnichannel Media Planning</h3>
-      <p>We coordinate across CTV, display, digital audio, social extensions, and print — building unified plans that deliver consistent messaging and compounding reach across every touchpoint.</p>
+      <p>CTV, display, audio, podcast and print planned as one budget, so channels work together instead of competing for credit.</p>
     </div>
     <div class="service-card">
       <div class="service-num">05</div>
       <h3>Unique Market Solutions</h3>
-      <p>Proprietary and partner-driven solutions that most agencies don't have access to — including distinct audience environments, inventory access, and creative delivery formats. For brands that want to show up where their competitors aren't.</p>
+      <p>Partner inventory and custom formats most agencies can't reach. For brands that want to show up where their competitors aren't.</p>
     </div>
     <div class="service-card">
       <div class="service-num">06</div>
       <h3>Strategy, Analytics & Measurement</h3>
-      <p>Multi-touch attribution, incrementality frameworks, and cross-channel reporting. We tell you what actually moved the needle — and where to invest next.</p>
+      <p>Cross-channel reporting and incrementality testing. We tell you what actually moved the needle, and where to put the next dollar.</p>
     </div>
   </div>
 </section>
 
 <!-- BELIEF -->
-<section id="belief" style="background:var(--bg); border-bottom:1px solid var(--border);">
-  <div style="max-width:860px;">
-    <div class="section-eyebrow">Our Belief</div>
-    <h2 class="section-title" style="max-width:720px;">The advertising industry is going through its fastest structural shift in 20 years.</h2>
-    <div class="section-body" style="max-width:100%;">
-      <p>Agentic AI is absorbing the execution layer. Retail media is replacing the open web as the most valuable audience environment. Connected television is becoming the performance channel, not just the brand channel.</p>
-      <p>Most agencies are still positioned for the world that's leaving. We're built for the one arriving — where human judgment, audience architecture, and cross-channel strategy are what separate outcomes from activity.</p>
-      <p style="color:var(--gold); font-style:italic; margin-top:28px; font-size:18px; font-family:'Georgia',serif; line-height:1.5;">"The execution is automated. The judgment isn't."</p>
+<section id="belief" style="background:var(--bg3);">
+  <div class="section-eyebrow">What We Believe</div>
+  <h2 class="section-title" style="max-width:900px;">The execution is automated. <em style="color:var(--gold);">The judgment isn't.</em></h2>
+  <div class="beliefs">
+    <div class="belief">
+      <h3>Cheap execution makes judgment the expensive part.</h3>
+      <p>AI now builds, bids and optimizes. Deciding where the money should go in the first place is still a person's job.</p>
+    </div>
+    <div class="belief">
+      <h3>Habit is the most expensive line item in a budget.</h3>
+      <p>Renewing last year's mix is the easy call. We question it every quarter.</p>
+    </div>
+    <div class="belief">
+      <h3>One plan beats six winning dashboards.</h3>
+      <p>Every platform reports its own success. We judge the plan on one agreed outcome.</p>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-eyebrow">Track Record</div>
+  <div class="section-eyebrow">Team Track Record</div>
   <h2 class="section-title">Decades of experience.<br>Category by category.</h2>
   <div class="exp-intro">
     <p class="section-body">Our team has activated media programs and built revenue infrastructure across some of the most demanding verticals in advertising — working directly with brands, platforms, and publishers.</p>
@@ -788,9 +975,9 @@
   <div class="section-eyebrow">Why Orbis Team</div>
   <div class="why-grid">
     <div class="why-left">
-      <h2 class="section-title">The platforms run the buy. We decide what's worth buying.</h2>
+      <h2 class="section-title">What you can hold us to.</h2>
       <div class="section-body">
-        <p>Platform AI optimizes inside its own auction. We work across all of them — deciding audience, channel and budget, and staying accountable for the outcome.</p>
+        <p>We've worked inside the platforms, alongside the networks and directly with brands, from broadcast to programmatic to retail media. You don't pay for a learning curve.</p>
         <p>We hold relationships with the industry's leading programmatic, retail media, and CTV platforms — giving clients access to primary inventory, first-look opportunities, and data environments most boutique agencies can't reach.</p>
       </div>
     </div>
@@ -823,8 +1010,10 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-eyebrow">Start a Conversation</div>
-  <h2 class="section-title">Tell us what you're trying to accomplish.</h2>
-  <p class="section-body" style="margin-bottom:0;">We'll respond within one business day. And if we're not the right fit for what you're building, we'll tell you that too — and point you in the right direction.</p>
+  <h2 class="section-title">Bring your current plan.</h2>
+  <p class="closing-line">On a 30-minute call we'll tell you what we'd cut, what we'd test, and whether we're the right fit. If we're not, we'll say so and point you in the right direction.</p>
+  <a href="https://api.leadconnectorhq.com/widget/bookings/orbis-intro-call-9288" class="btn-primary" style="display:inline-block;">Book a Time</a>
+  <p class="section-body" style="margin-top:40px; margin-bottom:0;">Prefer to write? Send a note below and we'll respond within one business day.</p>
   <div class="contact-grid">
     <div class="contact-info">
       <div class="contact-detail">
