@@ -68,14 +68,17 @@
     display: flex; align-items: center; justify-content: space-between;
     transition: background 0.3s;
   }
+  .nav-logo { display: flex; align-items: center; flex-shrink: 0; }
   .nav-logo img {
-    height: 38px;
     filter: var(--logo-filter);
     transition: filter 0.3s;
   }
+  .logo-full { height: 38px; }
+  .logo-compact { height: 48px; display: none; }
   .nav-links {
     display: flex; align-items: center; gap: 36px;
     list-style: none;
+    flex-shrink: 0;
   }
   .nav-links a {
     font-family: 'Arial', sans-serif;
@@ -93,6 +96,7 @@
     width: 38px; height: 38px; border-radius: 50%;
     font-size: 15px;
     display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
     transition: border-color 0.2s, color 0.2s;
   }
   .toggle-btn:hover { border-color: var(--gold); color: var(--gold); }
@@ -106,9 +110,71 @@
     padding: 10px 22px;
     border-radius: 2px;
     font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
     transition: background 0.2s, color 0.2s;
   }
   .nav-cta:hover { background: var(--gold-dim); color: #fff; }
+
+  /* ── MOBILE MENU BUTTON & DROPDOWN (markup present at all widths; ── */
+  /* ── menu-btn is display:none outside the header breakpoint below) ── */
+  .menu-btn {
+    display: none;
+    width: 42px; height: 42px;
+    background: none; border: 1px solid var(--border);
+    color: var(--text-dim); cursor: pointer;
+    border-radius: 50%; flex-shrink: 0;
+    align-items: center; justify-content: center;
+    padding: 0;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .menu-btn:hover, .menu-btn:focus-visible { border-color: var(--gold); color: var(--gold); }
+  .menu-icon { position: relative; width: 16px; height: 11px; display: block; }
+  .menu-icon span {
+    position: absolute; left: 0; right: 0; height: 1.5px;
+    background: currentColor;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .menu-icon span:nth-child(1) { top: 0; }
+  .menu-icon span:nth-child(2) { top: 5px; }
+  .menu-icon span:nth-child(3) { top: 10px; }
+  .menu-btn[aria-expanded="true"] .menu-icon span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .menu-icon span:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded="true"] .menu-icon span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+  .nav-dropdown[hidden] { display: none !important; }
+  .nav-dropdown {
+    position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+    padding: 8px 20px 24px;
+  }
+  .nav-dropdown a {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--border);
+    display: block;
+  }
+  .nav-dropdown a:hover, .nav-dropdown a:focus-visible { color: var(--gold); }
+  .nav-dropdown a:last-of-type { border-bottom: none; }
+  .nav-dropdown-cta {
+    margin-top: 14px;
+    text-align: center;
+    background: var(--gold);
+    color: var(--btn-text) !important;
+    font-weight: 600;
+    border-radius: 2px;
+    border-bottom: none !important;
+  }
+  .nav-dropdown-cta:hover { background: var(--gold-dim); color: #fff !important; }
 
   /* ── HERO ─────────────────────────────────────────────── */
   .hero {
@@ -211,7 +277,7 @@
   }
 
   /* ── SECTIONS ─────────────────────────────────────────── */
-  section { padding: 96px 80px; border-bottom: 1px solid var(--border); }
+  section { padding: 96px 80px; border-bottom: 1px solid var(--border); scroll-margin-top: 88px; }
   .section-eyebrow {
     font-family: 'Arial', sans-serif;
     font-size: 10px;
@@ -530,10 +596,28 @@
     text-align: right;
   }
 
-  /* ── MOBILE ───────────────────────────────────────────── */
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
+  /* ── HEADER / MOBILE NAV ──────────────────────────────── */
+  /* Separate breakpoint from the page-layout one below: the full      */
+  /* desktop nav row (logo + 7 links + theme toggle + CTA) measures    */
+  /* ~1350px at natural width, so it needs its own, wider threshold    */
+  /* rather than the 900px used for the content grids — 900px (or      */
+  /* even 1080px) left it squeezing/overflowing on tablets and small   */
+  /* laptops. Test note: unconstrained width measured via Playwright   */
+  /* at 2000px viewport = logo 221.7 + links 766.4 + right 282.4 +     */
+  /* 80px nav padding = ~1350.5px; 1400px gives ~50px of headroom.     */
+  @media (max-width: 1400px) {
+    nav { padding: 0 20px; }
     .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .logo-full { display: none; }
+    .logo-compact { display: block; }
+    .nav-right { gap: 10px; }
+    .toggle-btn { width: 42px; height: 42px; }
+    .menu-btn { display: flex; }
+  }
+
+  /* ── MOBILE (page layout / content grids) ────────────────── */
+  @media (max-width: 900px) {
     .hero { padding: 100px 28px 60px; }
     section { padding: 64px 28px; }
     .about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -666,7 +750,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNzIiIHdpZHRoPSI0MjAiIGhlaWdodD0iNzIiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAub3QtbWFyayB7IGZpbGw6IG5vbmU7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAub3QtdGV4dCB7IGZpbGw6ICNmZmZmZmY7IH0KICAgICAgLm90LWRvdCAgeyBmaWxsOiAjZmZmZmZmOyB9CiAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsKICAgICAgICAub3QtbWFyayB7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAgIC5vdC10ZXh0IHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICAgIC5vdC1kb3QgIHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KCiAgPCEtLSBTaWdodCBzY29wZSBpY29uOiBvdXRlciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMjgiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIFNpZ2h0IHNjb3BlOiBpbm5lciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMTAiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIENyb3NzaGFpciBsaW5lcyDigJQgdG9wIC0tPgogIDxsaW5lIHgxPSIzNiIgeTE9IjgiICB4Mj0iMzYiIHkyPSIyMiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPCEtLSBib3R0b20gLS0+CiAgPGxpbmUgeDE9IjM2IiB5MT0iNTAiIHgyPSIzNiIgeTI9IjY0IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIGxlZnQgLS0+CiAgPGxpbmUgeDE9IjgiICB5MT0iMzYiIHgyPSIyMiIgeTI9IjM2IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIHJpZ2h0IC0tPgogIDxsaW5lIHgxPSI1MCIgeTE9IjM2IiB4Mj0iNjQiIHkyPSIzNiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CgogIDwhLS0gQ2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIzNiIgY3k9IjM2IiByPSIyLjUiIGNsYXNzPSJvdC1kb3QiLz4KCiAgPCEtLSBPUkJJUyBURUFNIHRleHQgLS0+CiAgPHRleHQKICAgIHg9IjgwIiB5PSIzMCIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSI3MDAiCiAgICBsZXR0ZXItc3BhY2luZz0iNiIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5PUkJJUzwvdGV4dD4KCiAgPHRleHQKICAgIHg9IjgwIiB5PSI1NiIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSIzMDAiCiAgICBsZXR0ZXItc3BhY2luZz0iOCIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5URUFNPC90ZXh0PgoKPC9zdmc+" alt="Orbis Team"></a>
+  <a class="nav-logo" href="#"><img class="logo-full" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MjAgNzIiIHdpZHRoPSI0MjAiIGhlaWdodD0iNzIiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAub3QtbWFyayB7IGZpbGw6IG5vbmU7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAub3QtdGV4dCB7IGZpbGw6ICNmZmZmZmY7IH0KICAgICAgLm90LWRvdCAgeyBmaWxsOiAjZmZmZmZmOyB9CiAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsKICAgICAgICAub3QtbWFyayB7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAgIC5vdC10ZXh0IHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICAgIC5vdC1kb3QgIHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KCiAgPCEtLSBTaWdodCBzY29wZSBpY29uOiBvdXRlciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMjgiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIFNpZ2h0IHNjb3BlOiBpbm5lciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMTAiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIENyb3NzaGFpciBsaW5lcyDigJQgdG9wIC0tPgogIDxsaW5lIHgxPSIzNiIgeTE9IjgiICB4Mj0iMzYiIHkyPSIyMiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPCEtLSBib3R0b20gLS0+CiAgPGxpbmUgeDE9IjM2IiB5MT0iNTAiIHgyPSIzNiIgeTI9IjY0IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIGxlZnQgLS0+CiAgPGxpbmUgeDE9IjgiICB5MT0iMzYiIHgyPSIyMiIgeTI9IjM2IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIHJpZ2h0IC0tPgogIDxsaW5lIHgxPSI1MCIgeTE9IjM2IiB4Mj0iNjQiIHkyPSIzNiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CgogIDwhLS0gQ2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIzNiIgY3k9IjM2IiByPSIyLjUiIGNsYXNzPSJvdC1kb3QiLz4KCiAgPCEtLSBPUkJJUyBURUFNIHRleHQgLS0+CiAgPHRleHQKICAgIHg9IjgwIiB5PSIzMCIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSI3MDAiCiAgICBsZXR0ZXItc3BhY2luZz0iNiIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5PUkJJUzwvdGV4dD4KCiAgPHRleHQKICAgIHg9IjgwIiB5PSI1NiIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSIzMDAiCiAgICBsZXR0ZXItc3BhY2luZz0iOCIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5URUFNPC90ZXh0PgoKPC9zdmc+" alt="Orbis Team"><img class="logo-compact" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTUgNzIiIHdpZHRoPSIxOTUiIGhlaWdodD0iNzIiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAub3QtbWFyayB7IGZpbGw6IG5vbmU7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAub3QtdGV4dCB7IGZpbGw6ICNmZmZmZmY7IH0KICAgICAgLm90LWRvdCAgeyBmaWxsOiAjZmZmZmZmOyB9CiAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsKICAgICAgICAub3QtbWFyayB7IHN0cm9rZTogI2ZmZmZmZjsgfQogICAgICAgIC5vdC10ZXh0IHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICAgIC5vdC1kb3QgIHsgZmlsbDogI2ZmZmZmZjsgfQogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KCiAgPCEtLSBTaWdodCBzY29wZSBpY29uOiBvdXRlciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMjgiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIFNpZ2h0IHNjb3BlOiBpbm5lciBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMTAiIGNsYXNzPSJvdC1tYXJrIiBzdHJva2Utd2lkdGg9IjEuNSIvPgoKICA8IS0tIENyb3NzaGFpciBsaW5lcyDigJQgdG9wIC0tPgogIDxsaW5lIHgxPSIzNiIgeTE9IjgiICB4Mj0iMzYiIHkyPSIyMiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPCEtLSBib3R0b20gLS0+CiAgPGxpbmUgeDE9IjM2IiB5MT0iNTAiIHgyPSIzNiIgeTI9IjY0IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIGxlZnQgLS0+CiAgPGxpbmUgeDE9IjgiICB5MT0iMzYiIHgyPSIyMiIgeTI9IjM2IiBjbGFzcz0ib3QtbWFyayIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIHJpZ2h0IC0tPgogIDxsaW5lIHgxPSI1MCIgeTE9IjM2IiB4Mj0iNjQiIHkyPSIzNiIgY2xhc3M9Im90LW1hcmsiIHN0cm9rZS13aWR0aD0iMS41Ii8+CgogIDwhLS0gQ2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIzNiIgY3k9IjM2IiByPSIyLjUiIGNsYXNzPSJvdC1kb3QiLz4KCiAgPCEtLSBPUkJJUyBURUFNIHRleHQgLS0+CiAgPHRleHQKICAgIHg9IjgwIiB5PSIzMCIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSI3MDAiCiAgICBsZXR0ZXItc3BhY2luZz0iNiIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5PUkJJUzwvdGV4dD4KCiAgPHRleHQKICAgIHg9IjgwIiB5PSI1NiIKICAgIGZvbnQtZmFtaWx5PSInQXJpYWwnLCAnSGVsdmV0aWNhIE5ldWUnLCBzYW5zLXNlcmlmIgogICAgZm9udC1zaXplPSIyMiIKICAgIGZvbnQtd2VpZ2h0PSIzMDAiCiAgICBsZXR0ZXItc3BhY2luZz0iOCIKICAgIGNsYXNzPSJvdC10ZXh0IgogID5URUFNPC90ZXh0PgoKPC9zdmc+" alt="Orbis Team"></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
@@ -679,8 +763,21 @@
   <div class="nav-right">
     <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme">☀</button>
     <a href="#contact" class="nav-cta">Request a Consultation</a>
+    <button type="button" class="menu-btn" id="menuToggle" aria-controls="navDropdown" aria-expanded="false" aria-label="Open menu">
+      <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-dropdown" id="navDropdown" hidden>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#belief">Our Belief</a>
+  <a href="#experience">Experience</a>
+  <a href="#why">Why Orbis Team</a>
+  <a href="/pricing">Pricing</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" class="nav-dropdown-cta">Request a Consultation</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -948,6 +1045,56 @@
     toggle.textContent = next === 'dark' ? '☀' : '☾';
     localStorage.setItem('orbis-theme', next);
   });
+
+  // Mobile nav dropdown
+  const menuBtn = document.getElementById('menuToggle');
+  const navDropdown = document.getElementById('navDropdown');
+
+  function openMenu() {
+    navDropdown.hidden = false;
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuBtn.setAttribute('aria-label', 'Close menu');
+    document.addEventListener('click', onOutsideClick, true);
+    document.addEventListener('keydown', onMenuKeydown);
+  }
+
+  function closeMenu(opts) {
+    opts = opts || {};
+    if (navDropdown.hidden) return;
+    navDropdown.hidden = true;
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Open menu');
+    document.removeEventListener('click', onOutsideClick, true);
+    document.removeEventListener('keydown', onMenuKeydown);
+    if (opts.restoreFocus) menuBtn.focus();
+  }
+
+  function onOutsideClick(e) {
+    if (!navDropdown.contains(e.target) && !menuBtn.contains(e.target)) {
+      closeMenu();
+    }
+  }
+
+  function onMenuKeydown(e) {
+    if (e.key === 'Escape') closeMenu({ restoreFocus: true });
+  }
+
+  menuBtn.addEventListener('click', () => {
+    if (navDropdown.hidden) openMenu(); else closeMenu();
+  });
+
+  navDropdown.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') closeMenu();
+  });
+
+  // Reset mobile menu state when resizing/rotating back past the header breakpoint
+  const headerDesktopQuery = window.matchMedia('(min-width: 1401px)');
+  const handleHeaderQueryChange = (e) => { if (e.matches) closeMenu(); };
+  if (headerDesktopQuery.addEventListener) {
+    headerDesktopQuery.addEventListener('change', handleHeaderQueryChange);
+  } else if (headerDesktopQuery.addListener) {
+    headerDesktopQuery.addListener(handleHeaderQueryChange); // Safari <14 fallback
+  }
 
   // Formspree form submission
   const form = document.getElementById('contact-form');
